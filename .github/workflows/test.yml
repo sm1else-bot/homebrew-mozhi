@@ -1,0 +1,48 @@
+name: Test public Mozhi tap
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: tap-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  install:
+    name: Homebrew ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-15, macos-15-intel, ubuntu-22.04]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 20
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: '1'
+      HOMEBREW_NO_INSTALL_CLEANUP: '1'
+      HOMEBREW_NO_ANALYTICS: '1'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: Homebrew/actions/setup-homebrew@ae72030040bc05e2d65c41c577092cb98bc0a27e
+        with:
+          stable: true
+      - name: Install from the public release and run the formula tests
+        run: |
+          brew install sm1else-bot/mozhi/mozhi
+          brew test sm1else-bot/mozhi/mozhi
+          mozhi --version
+      - name: Reinstall and test again
+        run: |
+          brew reinstall sm1else-bot/mozhi/mozhi
+          brew test sm1else-bot/mozhi/mozhi
+      - name: Uninstall and verify removal
+        if: always()
+        run: |
+          if brew list --formula sm1else-bot/mozhi/mozhi >/dev/null 2>&1; then
+            brew uninstall sm1else-bot/mozhi/mozhi
+          fi
+          if command -v mozhi >/dev/null 2>&1; then
+            echo 'Mozhi command survived uninstall'
+            exit 1
+          fi

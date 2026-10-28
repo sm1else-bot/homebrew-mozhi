@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0",
+  "releaseCommit": "d213a6d5432af7fc0085aa33e28268bd5861bffd",
+  "nativeBuildUrl": "https://github.com/sm1else-bot/mozhi/actions/runs/40769573228",
+  "releaseUrl": "https://github.com/sm1else-bot/mozhi/releases/tag/v0.1.0",
+  "artifacts": {
+    "macos-arm64": {
+      "url": "https://github.com/sm1else-bot/mozhi/releases/download/v0.1.0/mozhi-0.1.0-macos-arm64.tar.gz",
+      "sha256": "810355f2189aac3da738887fa3642d4100ef557edbaaacfe425f6c92134b9608"
+    },
+    "macos-x64": {
+      "url": "https://github.com/sm1else-bot/mozhi/releases/download/v0.1.0/mozhi-0.1.0-macos-x64.tar.gz",
+      "sha256": "8ad9fb36a568aaf3bead593ee3d88da098acfc664a57d039ba4f82d32c17f684"
+    },
+    "linux-x64": {
+      "url": "https://github.com/sm1else-bot/mozhi/releases/download/v0.1.0/mozhi-0.1.0-linux-x64.tar.gz",
+      "sha256": "c41939967a45164f712cd6e1de1db8c4732993e10fdc6ae672d425335dbdfd36"
+    }
+  }
+}
